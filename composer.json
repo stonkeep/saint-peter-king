@@ -6,11 +6,23 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "barryvdh/laravel-cors": "^0.10.0",
         "fideloper/proxy": "~3.3",
+        "garygreen/pretty-routes": "^0.0.8",
+        "jansenfelipe/cep-gratis": "^4.0",
+        "jeroennoten/laravel-adminlte": "^1.22",
+        "laracasts/flash": "^3.0",
+        "laravel/dusk": "^2.0",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
+        "laravellegends/pt-br-validator": "^5.1",
+        "spatie/laravel-permission": "^2.7",
+        "unisharp/laravel-filemanager": "v1.8.2.2"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
+        "barryvdh/laravel-ide-helper": "^2.4",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
@@ -45,7 +57,10 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover"
+            "@php artisan package:discover",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
+            "php artisan optimize"
         ]
     },
     "config": {
