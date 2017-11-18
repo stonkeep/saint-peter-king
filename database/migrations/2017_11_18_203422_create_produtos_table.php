@@ -15,6 +15,10 @@ class CreateProdutosTable extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string("nome");
+            $table->string("descricao");
+            $table->double("peso_unitario");
+            $table->double("preco_unitario");
             $table->timestamps();
         });
     }
