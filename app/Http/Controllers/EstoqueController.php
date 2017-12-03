@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Pedido;
+use App\Estoque;
 use Illuminate\Http\Request;
 
-class PedidoController extends Controller
+class EstoqueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PedidoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\pedido  $pedido
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function show(pedido $pedido)
+    public function show(Estoque $estoque)
     {
         //
     }
@@ -52,10 +52,10 @@ class PedidoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\pedido  $pedido
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function edit(pedido $pedido)
+    public function edit(Estoque $estoque)
     {
         //
     }
@@ -64,10 +64,10 @@ class PedidoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\pedido  $pedido
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pedido $pedido)
+    public function update(Request $request, Estoque $estoque)
     {
         //
     }
@@ -75,10 +75,10 @@ class PedidoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\pedido  $pedido
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pedido $pedido)
+    public function destroy(Estoque $estoque)
     {
         //
     }

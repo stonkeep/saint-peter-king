@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\endereco;
+use App\Endereco;
 use Illuminate\Http\Request;
 
 class EnderecoController extends Controller

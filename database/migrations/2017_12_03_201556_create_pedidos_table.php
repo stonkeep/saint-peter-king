@@ -16,6 +16,13 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cliente_id');
+            $table->integer('tipoEntrega');
+            $table->integer('peso');
+            $table->integer('formaDePagamento');
+            $table->integer('impressaoDeComprovante');
+            $table->integer('NF');
+            $table->integer('status_id');
+            $table->integer('pesoDeSaida');
             $table->timestamps();
         });
     }

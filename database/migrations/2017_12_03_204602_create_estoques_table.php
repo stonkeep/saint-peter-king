@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmpresasTable extends Migration
+class CreateEstoquesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateEmpresasTable extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('estoques', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cpf_cnpj')->unique();
-            $table->string('nome');
-            $table->integer('telefone');
-            $table->integer('endereço_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateEmpresasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('estoques');
     }
 }
