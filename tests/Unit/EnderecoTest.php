@@ -10,6 +10,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class EnderecoTest extends TestCase
 {
     use DatabaseMigrations;
+
+    public function setUp()
+    {
+        parent::setUp();
+        factory(Endereco::class)->create();
+
+    }
+
     /**
      * A basic test example.
      *
@@ -18,10 +26,15 @@ class EnderecoTest extends TestCase
      */
     public function criaEndereco()
     {
-        factory(Endereco::class)->create();
         $end = Endereco::first();
 
         //Assertions
         $this->assertNotNull($end);
+    }
+
+    /** @test */
+    public function teste()
+    {
+
     }
 }

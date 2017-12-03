@@ -18,7 +18,6 @@ class CreateClientesTable extends Migration
             $table->integer('cpf_cnpj')->unique();
             $table->string('nome');
             $table->integer('telefone');
-            $table->integer('endereço_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

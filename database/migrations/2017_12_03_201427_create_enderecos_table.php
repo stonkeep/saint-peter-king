@@ -21,6 +21,8 @@ class CreateEnderecosTable extends Migration
             $table->integer('cep');
             $table->integer('numero');
             $table->string('complemento');
+            $table->integer('addressable_id');
+            $table->string('addressable_type');
             $table->timestamps();
         });
     }
