@@ -37,32 +37,21 @@ class ClienteTest extends TestCase
     public function testaRelationamento()
     {
         factory(Cliente::class)->create();
-//        Endereco::create([
-//            'nome' => 'Mateus',
-//            'cidade' => 'Brasilia',
-//            'logradouro' => 'Endereco',
-//            'cep' => 71900000,
-//            'numero' => 9,
-//            'Complemento' => 'Complemento',
-//            'addressable_id' => 1,
-//            'addressable_type' => 'App\Cliente'
-//        ]);
 
-//        $end = Endereco::first();
         $cli1 = Cliente::first();
         $cli1->enderecos()->create([
-            'nome' => 'Mateus',
+            'nome' => 'Endereco1',
             'cidade' => 'Brasilia',
             'logradouro' => 'Endereco',
             'cep' => 71900000,
             'numero' => 9,
             'Complemento' => 'Complemento',
-            'addressable_id' => 1,
-            'addressable_type' => 'App\Cliente'
+//            'addressable_id' => 1,
+//            'addressable_type' => 'App\Cliente'
         ]);
 
         //Verificações
-        $this->assertEquals("Mateus", $cli1->enderecos->first()->nome);
+        $this->assertEquals("Endereco1", $cli1->enderecos->first()->nome);
     }
 
     //TODO CRUD
