@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 //        outros
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+//        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         PrettyRoutes\ServiceProvider::class,
 //        Barryvdh\Cors\ServiceProvider::class,
         LaravelLegends\PtBrValidator\ValidatorProvider::class,
