@@ -14,7 +14,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+        $data = Produto::all();
+        return view('admin.produtos.index', compact('data'));
     }
 
     /**
@@ -35,7 +36,16 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+            [
+                "nome" => "required:string",
+                "descricao" => "required:string",
+                "peso_unitario" => "required:numeric",
+                "preco_unitario" => "required:numeric",
+            ]
+        );
+
+        Produto::create($request->all());
     }
 
     /**

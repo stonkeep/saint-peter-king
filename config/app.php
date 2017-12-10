@@ -179,11 +179,11 @@ return [
 
 //        outros
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        PrettyRoutes\ServiceProvider::class,
 //        Barryvdh\Cors\ServiceProvider::class,
         LaravelLegends\PtBrValidator\ValidatorProvider::class,
 //        Spatie\Permission\PermissionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+
 
 
 

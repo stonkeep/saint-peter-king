@@ -11,5 +11,11 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
+mix.js('resources/assets/js/app.js', 'public/js').extract(['bootstrap-table'])
    .sass('resources/assets/sass/app.scss', 'public/css');
+mix.styles([
+    'node_modules/bootstrap-table/src/bootstrap-table.css'
+], 'public/css/all.css');
+// mix.scripts([
+//     'node_modules/bootstrap-table/src/bootstrap-table.js',
+// ], 'public/js/all.js');
