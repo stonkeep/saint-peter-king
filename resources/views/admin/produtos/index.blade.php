@@ -5,7 +5,7 @@
 @section('title', 'Produtos')
 
 @section('content_header')
-    <h1>Propdutos</h1>
+    <h1>Produtos</h1>
 @stop
 
 @section('content')
@@ -18,13 +18,17 @@
             <a href="{{route('produtos.create')}}" class="btn btn-primary">NOVO</a>
         </div>
         <table id="table" data-toggle="table"
-               {{--data-search="true"--}}
-               {{--data-show-columns="true"--}}
-               {{--data-search-accent-neutralise="true"--}}
-               {{--data-locale="pt-BR"--}}
-               {{--data-page-size="10"--}}
-               {{--data-page-list="[10, 25, 50, 100]"--}}
-               {{--data-pagination="true"--}}
+               data-search="true"
+               data-show-columns="true"
+               data-search-accent-neutralise="true"
+               data-locale="pt-BR"
+               data-page-size="10"
+               data-page-list="[10, 25, 50, 100]"
+               data-pagination="true"
+               data-cache="false"
+               data-height=500
+               data-striped="true"
+               data-search-time-out=10
         >
             <thead class="thead-inverse">
             <tr>
@@ -71,7 +75,7 @@
     <script src="/js/vendor.js"></script>
     <script src="/js/app.js"></script>
     {{--<script>--}}
-        {{--$('#table').bootstrapTable({--}}
+        {{--$('table').bootstrapTable({--}}
             {{--cache: false,--}}
             {{--height: 500,--}}
             {{--striped: true,--}}
