@@ -12,7 +12,8 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js').extract(['bootstrap-table'])
-   .sass('resources/assets/sass/app.scss', 'public/css');
+   .sass('resources/assets/sass/app.scss', 'public/css')
+    .sourceMaps(); //Retirar sourceMaps da produção
 mix.styles([
     'node_modules/bootstrap-table/src/bootstrap-table.css'
 ], 'public/css/all.css');

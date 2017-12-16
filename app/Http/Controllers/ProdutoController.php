@@ -25,7 +25,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        $produto = new Produto();
+        return view('admin.produtos.create', compact('produto'));
     }
 
     /**
@@ -44,6 +45,7 @@ class ProdutoController extends Controller
                 "preco_unitario" => "required:numeric",
             ]
         );
+
 
         Produto::create($request->all());
     }
@@ -67,7 +69,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        return view('admin.premios.edit', compact('produto'));
     }
 
     /**
@@ -90,6 +92,9 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+        flash('Vigência deletado com sucesso')->success();
+
+        return redirect(route('produtos.index'));
     }
 }

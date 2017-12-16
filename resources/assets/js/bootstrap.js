@@ -7,11 +7,27 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
+/**
+* Vue is a modern JavaScript library for building interactive web interfaces
+* using reactive data binding and reusable components. Vue's API is clean
+* and simple, leaving you to focus on building your next great project.
+*/
+
+window.Vue = require('vue');
+
 try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
 } catch (e) {}
+
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -20,6 +36,7 @@ try {
  */
 
 window.axios = require('axios');
+
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -44,9 +61,12 @@ if (token) {
  */
 
 // import Echo from 'laravel-echo'
+import { Form, HasError, AlertError, AlertErrors } from 'vform'
 
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+Vue.component(AlertErrors.name, AlertErrors);
 // window.Pusher = require('pusher-js');
-
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'

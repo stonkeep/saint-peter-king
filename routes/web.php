@@ -21,7 +21,12 @@ Route::get('/admin', 'HomeController@index')->name('admin');
 
 Route::prefix('admin')->group(function () {
     Route::resource('clientes', 'ClienteController');
+
+//    Route Produtos
     Route::resource('produtos', 'ProdutoController');
+    Route::get('/produtos/delete/{produto}', ['as' => 'produtos.delete', 'uses' => 'ProdutoController@destroy']);
+
+
     Route::resource('permissions', 'PermissionController');
     Route::resource('roles', 'RoleController');
     Route::resource('estoques', 'EstoqueController');
