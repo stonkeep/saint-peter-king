@@ -4,7 +4,9 @@ namespace Tests\Unit;
 
 use App\Cliente;
 use App\Endereco;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -27,14 +29,13 @@ class ClienteTest extends TestCase
     {
         factory(Cliente::class)->create();
         $cliente = Cliente::first();
-        var_dump($cliente->nome);
 
         //Verificação
         $this->assertNotNull($cliente);
     }
 
     /** @test */
-    public function testaRelationamento()
+    public function testaRelationamentoEndereco()
     {
         factory(Cliente::class)->create();
 
@@ -55,4 +56,40 @@ class ClienteTest extends TestCase
     }
 
     //TODO CRUD
+
+    /** @test */
+    public function testaCrudComUsuario()
+    {
+        //Cria Usuáiro
+        factory(User::class)->create();
+        //Recupera usuário criado
+        $user = User::first();
+        //Verifica se o usuário existe mesmo
+        $this->assertNotNull($user);
+
+        //Cria um cliente para o novo usuário
+        $user->cliente()->create([
+            'cpf_cnpj' => 11111111111,
+            'nome' => "Jose",
+            'telefone' => 123456789,
+        ]);
+
+        $cliente = Cliente::first();
+
+        $this->assertEquals($user->name, $cliente->user->name);
+
+        //Testa UPDATE
+        $cliente->nome = "Arthur";
+        $cliente->save();
+        $cliente = Cliente::first();
+        //verifica
+        $this->assertEquals("Arthur", $cliente->nome);
+
+        //Testa Delete
+        $user->cliente()->delete();
+        //Tenta achar o cliente no banco de dados
+        $cliente = Cliente::first();
+        //Assert que não achou
+        $this->assertNull($cliente);
+    }
 }

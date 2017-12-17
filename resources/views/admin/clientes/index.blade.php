@@ -5,12 +5,12 @@
 @section('title', 'Produtos')
 
 @section('content_header')
-    <h1>Produtos</h1>
+    <h1>Clientes</h1>
 @stop
 
 @section('content')
     @php
-        $colunas = collect(['id', 'Descrição', 'Data de Criação', 'Data de Atualização']);
+        $colunas = collect(['id', 'Nome', 'CPF', 'Data de Criação']);
      $tipo = 'categorias' ;
     @endphp
     <div id="app">
@@ -50,7 +50,7 @@
                 <tr>
                     <td>{{$item->id}}</td>
                     <td>{{$item->nome}}</td>
-                    <td>{{$item->descricao}}</td>
+                    <td>{{$item->cpf_cnpj}}</td>
                     <td>{{$item->created_at}}</td>
                     <td><a class="btn btn-danger" href="{{route('produtos.delete', [$item->id])}}">Excluir</a></td>
                     <td><a class="btn btn-success" href="{{route('produtos.edit', [$item->id])}}">Editar</a></td>

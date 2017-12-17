@@ -52,4 +52,13 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function cliente()
+    {
+        return $this->hasOne('App\Cliente');
+    }
 }
