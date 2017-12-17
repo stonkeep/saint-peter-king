@@ -69,7 +69,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        return view('admin.premios.edit', compact('produto'));
+        return view('admin.produtos.edit', compact('produto'));
     }
 
     /**
@@ -81,7 +81,18 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+//        $produto = Produto::find($id);
+        var_dump($produto);
+
+        $this->validate(request(), [
+            "nome" => "required:string",
+            "descricao" => "required:string",
+            "peso_unitario" => "required:numeric",
+            "preco_unitario" => "required:numeric",
+        ]);
+
+        $produto->update($request->all());
+        flash('Vigência atualizado com sucesso')->success();
     }
 
     /**

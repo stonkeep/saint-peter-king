@@ -59,20 +59,22 @@
             return {
                 // Create a new form instance
                 form: new Form({
-                    descricao: this.descricao,
-                    nome: this.nome,
-                    peso_unitario: this.peso_unitario,
-                    preco_unitario: this.preco_unitario,
+                    id: this.produto.id,
+                    descricao: this.produto.descricao,
+                    nome: this.produto.nome,
+                    peso_unitario: this.produto.peso_unitario,
+                    preco_unitario: this.produto.preco_unitario,
                 })
             }
         },
+        props: ['produto'],
         methods: {
             submit () {
                 // Submit the form via a POST request
                 let location = window.location.href;
                 if (location.indexOf("edit") > -1) {
                     console.log(this.form.id);
-                    this.form.put('/admin/produtos/update/'+ this.form.id)
+                    this.form.put('/admin/produtos/'+ this.form.id)
                         .then(({data}) => {
                             window.location.href = '/admin/produtos'
                         })
