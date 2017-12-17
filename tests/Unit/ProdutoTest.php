@@ -11,21 +11,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ProdutoTest extends TestCase
 {
     use DatabaseMigrations;
-    /**
-     * A basic test example.
-     *
-     * @return void
-     * @test
-     */
-    public function crud()
-    {
-        factory(Produto::class)->create();
-        $produto = Produto::first();
-        $this->assertNotNull($produto);
-    }
+
 
     /** @test */
-    public function criaProduto()
+    public function testaCRUD()
     {
         $this->json('POST', "/admin/produtos/", [
             'nome' => "Tilápia",
@@ -39,10 +28,26 @@ class ProdutoTest extends TestCase
         $this->assertEquals("Tilápia", $produto->nome);
         $this->assertEquals("tilápia fresca", $produto->descricao);
 
+        //testa Index
         $response = $this->json('GET', "/admin/produtos");
-
         $response->assertSee("Tilápia");
 
+        //Testa update
+        $response = $this->json('PUT', "admin/produtos/{$produto->id}", [
+            'nome' => "Peixe qualquer",
+            'descricao' => "tilápia fresca",
+            'peso_unitario' => 1,
+            'preco_unitario' => 10,
+        ]);
+        //Verifica se update foi feito
+        $response = $this->json('GET', "/admin/produtos");
+        $response->assertSee("Peixe qualquer");
+
+        //testa DELETE
+        $this->json('GET', "admin/produtos/delete/$produto->id");
+        //Verifica se delete foi feito
+        $response = $this->json('GET', "/admin/produtos");
+        $response->assertDontSee("Peixe qualquer");
     }
 
 }
