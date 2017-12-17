@@ -183,6 +183,7 @@ return [
         LaravelLegends\PtBrValidator\ValidatorProvider::class,
 //        Spatie\Permission\PermissionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
 
 

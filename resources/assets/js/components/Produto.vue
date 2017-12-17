@@ -68,6 +68,9 @@
             }
         },
         props: ['produto'],
+        mounted() {
+            console.log('Component mounted.');
+        },
         methods: {
             submit () {
                 // Submit the form via a POST request
