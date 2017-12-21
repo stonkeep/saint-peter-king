@@ -173,22 +173,5 @@ class ClienteTest extends TestCase
         //Valida a existencia do endereço no banco
         $this->assertNotEmpty($endereco);
 
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -31,6 +31,11 @@ class Cliente extends Model
         return $this->morphMany('App\Endereco', 'addressable');
     }
 
+    public function pedidos()
+    {
+        return $this->hasMany('App\Pedido');
+    }
+
     /**
      * Get the phone record associated with the user.
      */
