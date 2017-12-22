@@ -41,4 +41,9 @@ class Pedido extends Model
     {
         return $this->belongsToMany('App\Endereco');
     }
+
+    public function cliente()
+    {
+        return $this->belongsTo('App\Pedido');
+    }
 }

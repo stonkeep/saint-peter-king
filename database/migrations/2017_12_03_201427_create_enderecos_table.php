@@ -24,6 +24,7 @@ class CreateEnderecosTable extends Migration
             $table->integer('addressable_id');
             $table->string('addressable_type');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

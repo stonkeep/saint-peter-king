@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Endereco
@@ -35,6 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Endereco extends Model
 {
+    use SoftDeletes; //When models are soft deleted, they are not actually removed from your database.
 
     protected $guarded = [];
 
@@ -48,4 +50,7 @@ class Endereco extends Model
     {
         return $this->morphTo();
     }
+
+    //SoftDeletes
+    protected $dates = ['deleted_at'];
 }

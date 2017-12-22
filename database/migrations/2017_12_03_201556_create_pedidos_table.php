@@ -15,11 +15,12 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('pedidos');
             $table->integer('tipoEntrega');
             $table->integer('peso');
             $table->integer('formaDePagamento');
-            $table->integer('impressaoDeComprovante');
+            $table->boolean('impressaoDeComprovante');
             $table->integer('NF');
             $table->integer('status_id');
             $table->integer('pesoDeSaida');
