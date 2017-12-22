@@ -17,8 +17,8 @@ class CreateProdutosTable extends Migration
             $table->increments('id');
             $table->string("nome");
             $table->string("descricao");
-            $table->double("peso_unitario");
-            $table->double("preco_unitario");
+            $table->double("pesoUnitario");
+            $table->double("precoUnitario");
             $table->timestamps();
         });
     }

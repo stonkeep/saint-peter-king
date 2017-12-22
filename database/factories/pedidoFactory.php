@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 /* @var Illuminate\Database\Eloquent\Factory $factory */
 
-$factory->define(App\pedido::class, function (Faker $faker) {
+$factory->define(App\Pedido::class, function (Faker $faker) {
     return [
         'tipoEntrega' => 1,
         'peso' => 12,

@@ -46,4 +46,9 @@ class Pedido extends Model
     {
         return $this->belongsTo('App\Pedido');
     }
+
+    public function produtos()
+    {
+        return $this->belongsToMany('App\Produto')->withPivot('pesoSaida', 'precoUnitario');
+    }
 }
