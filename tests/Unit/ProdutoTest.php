@@ -23,7 +23,7 @@ class ProdutoTest extends TestCase
             'preco_unitario' => 10,
         ]);
 
-        $produto = Produto::first();
+        $produto = Produto::firstOrFail();
 
         $this->assertEquals("Tilápia", $produto->nome);
         $this->assertEquals("tilápia fresca", $produto->descricao);
