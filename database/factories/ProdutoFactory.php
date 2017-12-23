@@ -8,7 +8,7 @@ $factory->define(App\Produto::class, function (Faker $faker) {
     return [
         'nome' => $faker->company,
         'descricao' => $faker->catchPhrase,
-        'pesoUnitario' => 1,
-        'precoUnitario' => 10,
+        'pesoUnitario' => $faker->randomDigit,
+        'precoUnitario' => $faker->randomDigit,
     ];
 });

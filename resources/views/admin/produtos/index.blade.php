@@ -10,7 +10,7 @@
 
 @section('content')
     @php
-        $colunas = collect(['id', 'Descrição', 'Data de Criação', 'Data de Atualização']);
+        $colunas = collect(['id', 'Descrição', 'Descrição', 'Data de Atualização']);
      $tipo = 'categorias' ;
     @endphp
     <div id="app">
@@ -26,7 +26,7 @@
                data-page-list="[10, 25, 50, 100]"
                data-pagination="true"
                data-cache="false"
-               data-height=500
+               {{--data-height=500--}}
                data-striped="true"
                data-search-time-out=10
         >
