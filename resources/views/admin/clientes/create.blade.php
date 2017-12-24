@@ -4,7 +4,7 @@
 @section('title', 'Premio')
 
 @section('content_header')
-    <h1>Premio</h1>
+    <h1>Clientes</h1>
 @stop
 
 @section('content')
@@ -13,8 +13,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <div id="app">
-        <produto></produto>
-    </div>
+        {{--Cliente.vue--}}
+        <cliente :cliente="{{$cliente}}"></cliente>    </div>
 
 @stop
 

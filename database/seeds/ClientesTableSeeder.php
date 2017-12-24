@@ -14,7 +14,7 @@ class ClientesTableSeeder extends Seeder
     public function run()
     {
         $users = User::all();
-        
+
         foreach ($users as $user) {
             $cliente = factory(Cliente::class)->make();
             $user->cliente()->save($cliente);

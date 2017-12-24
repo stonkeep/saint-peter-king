@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration
             $table->increments('id');
             $table->string('cpf_cnpj')->unique();
             $table->string('nome');
-            $table->integer('telefone');
+            $table->string('telefone');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');;
             $table->timestamps();

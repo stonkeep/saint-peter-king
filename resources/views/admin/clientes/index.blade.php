@@ -15,7 +15,7 @@
     @endphp
     <div id="app">
         <div>
-            <a href="{{route('produtos.create')}}" class="btn btn-primary">NOVO</a>
+            <a href="{{route('clientes.create')}}" class="btn btn-primary">NOVO</a>
         </div>
         <table id="table" data-toggle="table"
                data-search="true"
@@ -52,8 +52,8 @@
                     <td>{{$item->nome}}</td>
                     <td>{{$item->cpf_cnpj}}</td>
                     <td>{{$item->created_at}}</td>
-                    <td><a class="btn btn-danger" href="{{route('produtos.delete', [$item->id])}}">Excluir</a></td>
-                    <td><a class="btn btn-success" href="{{route('produtos.edit', [$item->id])}}">Editar</a></td>
+                    <td><a class="btn btn-danger" href="{{route('clientes.delete', [$item->id])}}">Excluir</a></td>
+                    <td><a class="btn btn-success" href="{{route('clientes.edit', [$item->id])}}">Editar</a></td>
                 </tr>
             @endforeach
             </tbody>

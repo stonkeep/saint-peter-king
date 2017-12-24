@@ -20,7 +20,11 @@ Auth::routes();
 Route::get('/admin', 'HomeController@index')->name('admin');
 
 Route::prefix('admin')->group(function () {
+
+    //Rora Clientes
     Route::resource('clientes', 'ClienteController');
+    Route::get('/clientes/delete/{produto}', ['as' => 'clientes.delete', 'uses' => 'ProdutoController@destroy']);
+
 
 //    Route Produtos
     Route::resource('produtos', 'ProdutoController');

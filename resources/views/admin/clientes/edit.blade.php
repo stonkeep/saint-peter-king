@@ -13,7 +13,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <div id="app">
-        <produto :clientes="{{$clientes}}"></produto>
+        {{--Cliente.vue--}}
+        <cliente :cliente="{{$cliente}}"></cliente>
     </div>
 
 @stop

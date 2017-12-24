@@ -12,6 +12,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        //Cria usuário padrão admin
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com.br',
+            'password' => 123456
+        ]);
+
+        //Cria usuários genéricos
         factory(User::class, 30)->create();
     }
 }

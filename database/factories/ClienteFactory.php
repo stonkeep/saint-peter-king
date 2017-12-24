@@ -10,7 +10,7 @@ $factory->define(App\Cliente::class, function (Faker $faker) {
     return [
         'cpf_cnpj' => $faker->cpf(false),
         'nome' => $faker->name,
-        'telefone' => 123456789,
+        'telefone' => $faker->phoneNumberCleared,
         'user_id' => 1
     ];
 });

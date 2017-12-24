@@ -62,10 +62,15 @@ if (token) {
 
 // import Echo from 'laravel-echo'
 import { Form, HasError, AlertError, AlertErrors } from 'vform'
+import VueTheMask from 'vue-the-mask'
+
 
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
 Vue.component(AlertErrors.name, AlertErrors);
+
+//dependencia para criar mascaras nos campos
+Vue.use(VueTheMask)
 // window.Pusher = require('pusher-js');
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
