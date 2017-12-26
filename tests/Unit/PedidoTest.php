@@ -39,7 +39,7 @@ class PedidoTest extends TestCase
         $produto = Produto::find(1);
         $produto2 = Produto::find(2);
 
-        //$cliente cria um pedidp
+        //$cliente cria um pedido
         $cliente->pedidos()->create([
             'tipoEntrega' => 1,
             'formaDePagamento' => 1,
@@ -47,6 +47,10 @@ class PedidoTest extends TestCase
             'NF' => 123456789,
             'status_id' => 1,
         ]);
+
+        //TODO criar tabela com o tipos de entregas
+        //TODO criar tabela com o formas de pagamentos
+        //TODO criar tabela com os status do pedido
 
         //Busca o pedido gravado
         $pedido = $cliente->pedidos()->first();
@@ -60,7 +64,16 @@ class PedidoTest extends TestCase
         //Verifica se foi gravado o pedido
         $this->assertNotEmpty($cliente->pedidos()->first()->produtos);
 
-        //TODO more asserts
+        //TODO UPDATE
+        $pedido = $cliente->pedidos()->first();
+        $pedido->status_id = 2;
+        $pedido->save();
+        //Verifica se foi mesmo atualizado no banco de dados
+        $this->assertEquals(Pedido::first()->status_id, 2);
+
+        //TODO DELETE
+        $pedido->delete();
+        $this->assertEmpty(Pedido::first());
 
     }
 }
