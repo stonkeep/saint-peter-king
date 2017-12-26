@@ -6,6 +6,7 @@ use App\Cliente;
 use App\Endereco;
 use App\Pedido;
 use App\Produto;
+use App\TipoEntrega;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -14,6 +15,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class PedidoTest extends TestCase
 {
     Use DatabaseMigrations;
+
+    public function setUp()
+    {
+        parent::setUp();
+        factory(TipoEntrega::class)->create();
+    }
 
     /**
      * A basic test example.
@@ -41,7 +48,7 @@ class PedidoTest extends TestCase
 
         //$cliente cria um pedido
         $cliente->pedidos()->create([
-            'tipoEntrega' => 1,
+            'tipoEntrega' => TipoEntrega::first(),
             'formaDePagamento' => 1,
             'impressaoDeComprovante' => true,
             'NF' => 123456789,

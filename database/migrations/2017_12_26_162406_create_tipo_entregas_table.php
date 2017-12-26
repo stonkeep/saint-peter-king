@@ -15,6 +15,7 @@ class CreateTipoEntregasTable extends Migration
     {
         Schema::create('tipo_entregas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descricao');
             $table->timestamps();
         });
     }
