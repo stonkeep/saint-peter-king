@@ -11,6 +11,13 @@ class FormaPagamentoTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(\App\FormaPagamento::class)->create();
+        \App\FormaPagamento::create([
+            'descricao' => 'cartão de débito'
+        ]);
+
+        \App\FormaPagamento::create([
+            'descricao' => 'dinheiro'
+        ]);
     }
 }

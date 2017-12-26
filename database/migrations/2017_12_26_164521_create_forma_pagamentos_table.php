@@ -15,7 +15,9 @@ class CreateFormaPagamentosTable extends Migration
     {
         Schema::create('forma_pagamentos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descricao');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

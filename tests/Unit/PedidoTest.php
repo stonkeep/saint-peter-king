@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Cliente;
 use App\Endereco;
+use App\FormaPagamento;
 use App\Pedido;
 use App\Produto;
 use App\TipoEntrega;
@@ -20,6 +21,7 @@ class PedidoTest extends TestCase
     {
         parent::setUp();
         factory(TipoEntrega::class)->create();
+        factory(FormaPagamento::class)->create();
     }
 
     /**
@@ -49,14 +51,14 @@ class PedidoTest extends TestCase
         //$cliente cria um pedido
         $cliente->pedidos()->create([
             'tipoEntrega' => TipoEntrega::first(),
-            'formaDePagamento' => 1,
+            'formaDePagamento' => FormaPagamento::firstOrFail(),
             'impressaoDeComprovante' => true,
             'NF' => 123456789,
             'status_id' => 1,
         ]);
 
-        //TODO criar tabela com o formas de pagamentos
         //TODO criar tabela com os status do pedido
+
 
         //Busca o pedido gravado
         $pedido = $cliente->pedidos()->first();
@@ -83,6 +85,8 @@ class PedidoTest extends TestCase
 
         //Verifica se op pedido foi realmente deletado
         $this->assertEmpty(Pedido::first());
+
+        //TODO fazer o update na forma de pagamento
 
     }
 }

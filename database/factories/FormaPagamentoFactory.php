@@ -6,6 +6,6 @@ use Faker\Generator as Faker;
 
 $factory->define(App\FormaPagamento::class, function (Faker $faker) {
     return [
-        //
+        'descricao' => 'cartão de crédito'
     ];
 });
