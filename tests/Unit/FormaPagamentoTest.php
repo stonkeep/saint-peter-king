@@ -37,6 +37,7 @@ class FormaPagamentoTest extends TestCase
         //Verifica se foi mesmo deletado
         $formaPagamento = FormaPagamento::first();
         $this->assertEmpty($formaPagamento);
-
     }
+    //TODO fazer o teste com route
+    //TODO fazer o teste com o front end
 }
