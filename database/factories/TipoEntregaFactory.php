@@ -6,6 +6,6 @@ use Faker\Generator as Faker;
 
 $factory->define(App\TipoEntrega::class, function (Faker $faker) {
     return [
-        'descricao' => 'Pessoal'
+        'descricao' => 'Entrega em unico estabelecimento'
     ];
 });

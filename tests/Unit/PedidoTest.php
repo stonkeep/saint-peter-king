@@ -55,7 +55,6 @@ class PedidoTest extends TestCase
             'status_id' => 1,
         ]);
 
-        //TODO criar tabela com o tipos de entregas
         //TODO criar tabela com o formas de pagamentos
         //TODO criar tabela com os status do pedido
 
@@ -71,15 +70,18 @@ class PedidoTest extends TestCase
         //Verifica se foi gravado o pedido
         $this->assertNotEmpty($cliente->pedidos()->first()->produtos);
 
-        //TODO UPDATE
+        //Faz update no status da entrega
         $pedido = $cliente->pedidos()->first();
         $pedido->status_id = 2;
         $pedido->save();
         //Verifica se foi mesmo atualizado no banco de dados
         $this->assertEquals(Pedido::first()->status_id, 2);
 
-        //TODO DELETE
+
+        //Deleta o pedido
         $pedido->delete();
+
+        //Verifica se op pedido foi realmente deletado
         $this->assertEmpty(Pedido::first());
 
     }
