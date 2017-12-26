@@ -7,6 +7,7 @@ use App\Endereco;
 use App\FormaPagamento;
 use App\Pedido;
 use App\Produto;
+use App\StatusPedido;
 use App\TipoEntrega;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -17,11 +18,20 @@ class PedidoTest extends TestCase
 {
     Use DatabaseMigrations;
 
+    //Aqui cria-se os dados comuns que serão utilizados em todos os teste
     public function setUp()
     {
         parent::setUp();
+        //Cria o tipo de entrega
         factory(TipoEntrega::class)->create();
+        //Cria forma de pagamento
         factory(FormaPagamento::class)->create();
+        //Cria o primeiro status do pedido
+        factory(StatusPedido::class)->create();
+        //Cria-se mais um status do pedido para estar a alteração do mesmo
+        \App\StatusPedido::create([
+            'descricao' => 'entregue'
+        ]);
     }
 
     /**
@@ -87,6 +97,6 @@ class PedidoTest extends TestCase
         $this->assertEmpty(Pedido::first());
 
         //TODO fazer o update na forma de pagamento
-
+        //TODO fazer teste update do status do pedido
     }
 }

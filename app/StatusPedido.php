@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FormaPagamento extends Model
+class StatusPedido extends Model
 {
     use SoftDeletes;
 
@@ -17,6 +17,4 @@ class FormaPagamento extends Model
     protected $dates = ['deleted_at'];
 
     protected $guarded = [];
-
-
 }
