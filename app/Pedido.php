@@ -44,11 +44,21 @@ class Pedido extends Model
 
     public function cliente()
     {
-        return $this->belongsTo('App\Pedido');
+        return $this->belongsTo('App\Cliente');
     }
 
     public function produtos()
     {
         return $this->belongsToMany('App\Produto')->withPivot('pesoSaida', 'precoUnitario');
+    }
+
+    public function formaPagamento()
+    {
+        return $this->belongsTo('App\FormaPagamento', 'id');
+    }
+
+    public function tipoEntrega()
+    {
+        return $this->belongsTo('App\TipoEntrega', 'id');
     }
 }

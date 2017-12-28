@@ -11,23 +11,48 @@ use App\StatusPedido;
 use App\TipoEntrega;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PedidoTest extends TestCase
 {
     Use DatabaseMigrations;
+    Use DatabaseTransactions;
 
     //Aqui cria-se os dados comuns que serão utilizados em todos os teste
     public function setUp()
     {
         parent::setUp();
+        //Cria dois produtos
+        factory(Produto::class, 2)->create();
+
+        //Para fazer pedido precisa de um cliente
+        factory(Cliente::class)->create();
+        $cliente = Cliente::first();
+
+        //Tudo precisa de um usuário
+        factory(User::class)->create();
+        $user = User::first();
+
+        //cria endereço e vincula a cliente
+
+        $cliente->enderecos()->save(factory(Endereco::class)->make());
+
         //Cria o tipo de entrega
         factory(TipoEntrega::class)->create();
-        //Cria forma de pagamento
+
+        //Cria forma de pagamento 1
         factory(FormaPagamento::class)->create();
+
+        //Cria forma de pagamento 2
+        FormaPagamento::create([
+            'descricao' => 'cartão de débito'
+        ]);
+
         //Cria o primeiro status do pedido
         factory(StatusPedido::class)->create();
+
         //Cria-se mais um status do pedido para estar a alteração do mesmo
         \App\StatusPedido::create([
             'descricao' => 'entregue'
@@ -43,35 +68,21 @@ class PedidoTest extends TestCase
     public function crudPedido()
     {
 
-        //Tudo precisa de um usuário
-        factory(User::class)->create();
-        $user = User::first();
-
-        //Para fazer pedido precisa de um cliente
-        factory(Cliente::class)->create();
+        //$cliente cria um pedido
         $cliente = Cliente::first();
 
-        //cria endereço e vincula a cliente
-        $cliente->enderecos()->save(factory(Endereco::class)->make());
-
-        factory(Produto::class, 2)->create();
-        $produto = Produto::find(1);
-        $produto2 = Produto::find(2);
-
-        //$cliente cria um pedido
         $cliente->pedidos()->create([
-            'tipoEntrega' => TipoEntrega::first(),
-            'formaDePagamento' => FormaPagamento::firstOrFail(),
+            'tipo_entregas_id' => TipoEntrega::first()->id,
+//            'forma_pagamentos_id' => FormaPagamento::firstOrFail()->id,
             'impressaoDeComprovante' => true,
             'NF' => 123456789,
             'status_id' => 1,
         ]);
 
-        //TODO criar tabela com os status do pedido
-
 
         //Busca o pedido gravado
-        $pedido = $cliente->pedidos()->first();
+        $pedido = Pedido::firstOrFail();
+        $pedido->formaPagamento()->associate(FormaPagamento::find(1));
 
         //Acrescenta os produtos aos pedidos
         $pedido->produtos()->attach([
@@ -89,14 +100,32 @@ class PedidoTest extends TestCase
         //Verifica se foi mesmo atualizado no banco de dados
         $this->assertEquals(Pedido::first()->status_id, 2);
 
+        //testa update na forma de pagamento
+        $pedido = $cliente->pedidos()->first();
+        $pedido->formaPagamento()->associate(FormaPagamento::find(2));
+        $pedido->save();
+
+
+        //Verifica se a forma de pagamento foi atualizada
+        $this->assertEquals(Pedido::firstOrFail()->formaPagamento->id, 2);
+        $this->assertEquals(Pedido::firstOrFail()->formaPagamento->descricao, 'cartão de débito');
+
+
+        //TODO fazer teste update do status do pedido
+
+
+
+
+
+
+
+
+
+
 
         //Deleta o pedido
         $pedido->delete();
-
         //Verifica se op pedido foi realmente deletado
         $this->assertEmpty(Pedido::first());
-
-        //TODO fazer o update na forma de pagamento
-        //TODO fazer teste update do status do pedido
     }
 }

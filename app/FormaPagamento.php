@@ -18,5 +18,10 @@ class FormaPagamento extends Model
 
     protected $guarded = [];
 
+    public function pedidos()
+    {
+        return $this->hasMany('App\Pedido');
+    }
+
 
 }
