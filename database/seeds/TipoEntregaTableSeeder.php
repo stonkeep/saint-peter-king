@@ -13,11 +13,11 @@ class TipoEntregaTableSeeder extends Seeder
     public function run()
     {
         TipoEntrega::create([
-            'decricao' => 'Entrega em unico estabelecimento'
+            'descricao' => 'Entrega em unico estabelecimento'
         ]);
 
         TipoEntrega::create([
-            'decricao' => 'Entrega em vários estabelecimento'
+            'descricao' => 'Entrega em vários estabelecimento'
         ]);
     }
 }

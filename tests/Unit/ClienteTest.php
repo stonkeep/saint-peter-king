@@ -69,8 +69,6 @@ class ClienteTest extends TestCase
         $this->assertEquals("Endereco1", $cli1->enderecos->first()->nome);
     }
 
-    //TODO CRUD
-
     /** @test */
     public function testaCrudComUsuario()
     {
