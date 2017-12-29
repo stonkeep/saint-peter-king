@@ -41,6 +41,9 @@ class PedidoTest extends TestCase
 
         //Cria o tipo de entrega
         factory(TipoEntrega::class)->create();
+        TipoEntrega::create([
+            'descricao' => 'rapida'
+        ]);
 
         //Cria forma de pagamento 1
         factory(FormaPagamento::class)->create();
@@ -72,17 +75,19 @@ class PedidoTest extends TestCase
         $cliente = Cliente::first();
 
         $cliente->pedidos()->create([
-            'tipo_entregas_id' => TipoEntrega::first()->id,
+//            'tipo_entregas_id' => TipoEntrega::first()->id,
 //            'forma_pagamentos_id' => FormaPagamento::firstOrFail()->id,
             'impressaoDeComprovante' => true,
             'NF' => 123456789,
-            'status_id' => 1,
+//            'status_id' => 1,
         ]);
 
 
         //Busca o pedido gravado
         $pedido = Pedido::firstOrFail();
         $pedido->formaPagamento()->associate(FormaPagamento::find(1));
+        $pedido->tipoEntrega()->associate(TipoEntrega::find(1));
+        $pedido->status()->associate(StatusPedido::find(1));
 
         //Acrescenta os produtos aos pedidos
         $pedido->produtos()->attach([
@@ -93,35 +98,38 @@ class PedidoTest extends TestCase
         //Verifica se foi gravado o pedido
         $this->assertNotEmpty($cliente->pedidos()->first()->produtos);
 
-        //Faz update no status da entrega
-        $pedido = $cliente->pedidos()->first();
-        $pedido->status_id = 2;
-        $pedido->save();
-        //Verifica se foi mesmo atualizado no banco de dados
-        $this->assertEquals(Pedido::first()->status_id, 2);
 
         //testa update na forma de pagamento
         $pedido = $cliente->pedidos()->first();
         $pedido->formaPagamento()->associate(FormaPagamento::find(2));
         $pedido->save();
 
-
         //Verifica se a forma de pagamento foi atualizada
         $this->assertEquals(Pedido::firstOrFail()->formaPagamento->id, 2);
-        $this->assertEquals(Pedido::firstOrFail()->formaPagamento->descricao, 'cartão de débito');
+        $this->assertEquals(Pedido::firstOrFail()->formaPagamento->descricao, FormaPagamento::find(2)->descricao);
 
 
-        //TODO fazer teste update do status do pedido
+        //Testa tipo de entrega
+        $pedido = $cliente->pedidos()->first();
+        $pedido->tipoEntrega()->associate(TipoEntrega::find(2));
+        $pedido->save();
 
 
+        //Verifica se a forma de pagamento foi atualizada
+        $this->assertEquals(Pedido::firstOrFail()->tipoEntrega->id, 2);
+        $this->assertEquals(Pedido::firstOrFail()->tipoEntrega->descricao, TipoEntrega::find(2)->descricao);
 
 
+        //Testa alteração no status do pedido
+        //Busca pedido na base
+        $pedido = $cliente->pedidos()->first();
 
+        //Altera
+        $pedido->status()->associate(StatusPedido::find(2));
+        $pedido->save();
 
-
-
-
-
+        //verifica se a alteração funcionou
+        $this->assertEquals('entregue', $pedido->status->descricao);
 
         //Deleta o pedido
         $pedido->delete();

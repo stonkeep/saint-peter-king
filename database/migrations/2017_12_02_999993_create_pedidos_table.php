@@ -17,13 +17,14 @@ class CreatePedidosTable extends Migration
             $table->increments('id');
             $table->integer('cliente_id')->unsigned();
             $table->foreign('cliente_id')->references('id')->on('pedidos');
-            $table->integer('tipo_entregas_id')->unsigned();
+            $table->integer('tipo_entregas_id')->unsigned()->nullable();
             $table->foreign('tipo_entregas_id')->references('id')->on('tipo_entregas');
             $table->integer('forma_pagamentos_id')->unsigned()->nullable();
             $table->foreign('forma_pagamentos_id')->references('id')->on('forma_pagamentos');
             $table->boolean('impressaoDeComprovante');
             $table->integer('NF');
-            $table->integer('status_id');
+            $table->integer('status_pedidos_id')->unsigned()->nullable();
+            $table->foreign('status_pedidos_id')->references('id')->on('status_pedidos');
             $table->timestamps();
         });
     }

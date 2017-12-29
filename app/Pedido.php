@@ -61,4 +61,10 @@ class Pedido extends Model
     {
         return $this->belongsTo('App\TipoEntrega', 'id');
     }
+
+    public function status()
+    {
+        return $this->belongsTo('App\StatusPedido', 'id');
+    }
+
 }
