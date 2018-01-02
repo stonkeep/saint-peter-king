@@ -136,4 +136,6 @@ class PedidoTest extends TestCase
         //Verifica se op pedido foi realmente deletado
         $this->assertEmpty(Pedido::first());
     }
+
+    //TODO fazer o front end e testar
 }

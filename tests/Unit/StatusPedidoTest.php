@@ -37,4 +37,5 @@ class StatusPedidoTest extends TestCase
         //Verifica se foi deletado mesmo
         $this->assertEmpty(StatusPedido::first());
     }
+    //TODO front end admin
 }
