@@ -14,7 +14,8 @@ class FormaPagamentoController extends Controller
      */
     public function index()
     {
-        //
+        $data = FormaPagamento::all();
+        return view('admin.pagamentos.index', compact("data"));
     }
 
     /**

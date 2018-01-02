@@ -138,6 +138,14 @@ return [
 //            'label_color' => 'success',
 //            'can'  => 'gerenciar-usuarios',
         ],
+        [
+            'text'        => 'Formas de pagamento',
+            'url'         => 'admin/pagamentos',
+            'icon'        => 'archive',
+//            'label'       => 4,
+//            'label_color' => 'success',
+//            'can'  => 'gerenciar-usuarios',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',

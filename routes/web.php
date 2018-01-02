@@ -23,7 +23,7 @@ Route::prefix('admin')->group(function () {
 
     //Rora Clientes
     Route::resource('clientes', 'ClienteController');
-    Route::get('/clientes/delete/{produto}', ['as' => 'clientes.delete', 'uses' => 'ProdutoController@destroy']);
+    Route::get('/clientes/delete/{cliente}', ['as' => 'clientes.delete', 'uses' => 'ClienteController@destroy']); //TODO testar essa parte
 
 
 //    Route Produtos
@@ -34,5 +34,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('permissions', 'PermissionController');
     Route::resource('roles', 'RoleController');
     Route::resource('estoques', 'EstoqueController');
+
+    //Route Formas de pagamento
+    Route::resource('pagamentos', 'FormaPagamentoController');
+    Route::get('/pagamentos/delete/{pagamento}', ['as' => 'pagamentos.delete', 'uses' => 'FormaPagamentoController@destroy']);
 //    Route::resource('users', 'UserController');
 });

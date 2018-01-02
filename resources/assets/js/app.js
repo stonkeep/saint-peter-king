@@ -17,6 +17,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('produto', require('./components/Produto.vue'));
 Vue.component('cliente', require('./components/Cliente.vue'));
+Vue.component('forma-pagamento', require('./components/FormaPagamento.vue'));
 
 const app = new Vue({
     el: '#app'
