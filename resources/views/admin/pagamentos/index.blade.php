@@ -5,7 +5,7 @@
 @section('title', 'Produtos')
 
 @section('content_header')
-    <h1>Produtos</h1>
+    <h1>Forma de Pagamento</h1>
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
     @endphp
     <div id="app">
         <div>
-            <a href="{{route('produtos.create')}}" class="btn btn-primary">NOVO</a>
+            <a href="{{route('pagamentos.create')}}" class="btn btn-primary">NOVO</a>
         </div>
         <table id="table" data-toggle="table"
                data-search="true"
