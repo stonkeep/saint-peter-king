@@ -50,8 +50,8 @@
                 <tr>
                     <td>{{$item->id}}</td>
                     <td>{{$item->descricao}}</td>
-                    <td><a class="btn btn-danger" href="{{route('pagamentos.delete', [$item->id])}}">Excluir</a></td>
-                    <td><a class="btn btn-success" href="{{route('pagamentos.edit', [$item->id])}}">Editar</a></td>
+                    <td><a dusk="excluir{{$item->id}}" class="btn btn-danger" href="{{route('pagamentos.delete', [$item->id])}}">Excluir</a></td>
+                    <td><a dusk="editar{{$item->id}}" class="btn btn-success" href="{{route('pagamentos.edit', [$item->id])}}">Editar</a></td>
                 </tr>
             @endforeach
             </tbody>
