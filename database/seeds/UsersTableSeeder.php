@@ -20,6 +20,6 @@ class UsersTableSeeder extends Seeder
         ]);
 
         //Cria usuários genéricos
-        factory(User::class, 30)->create();
+        factory(User::class, 10)->create();
     }
 }

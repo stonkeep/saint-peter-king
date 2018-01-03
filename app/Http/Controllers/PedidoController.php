@@ -14,7 +14,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
+        $data = Pedido::all();
+        return view('admin.pedidos.index', compact('data'));
     }
 
     /**

@@ -39,4 +39,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('pagamentos', 'FormaPagamentoController');
     Route::get('/pagamentos/delete/{pagamento}', ['as' => 'pagamentos.delete', 'uses' => 'FormaPagamentoController@destroy']);
 //    Route::resource('users', 'UserController');
+
+
+    //Route Pedidos
+    Route::resource('pedidos', 'PedidoController');
+    Route::get('/pedidos/delete/{pedido}', ['as' => 'pedidos.delete', 'uses' => 'PedidoController@destroy']);
 });

@@ -70,6 +70,4 @@ class FormaPagamentoTest extends TestCase
         $pagamentoDeletado = FormaPagamento::first();
         $this->assertEmpty($pagamentoDeletado);
     }
-
-    //TODO fazer o teste com o front end
 }

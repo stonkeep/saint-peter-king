@@ -74,3 +74,5 @@ class FormaDePagamentoTest extends DuskTestCase
         });
     }
 }
+
+//TODO fazer com que rode em outro banco de dados ou em memoria e outro servidor...
