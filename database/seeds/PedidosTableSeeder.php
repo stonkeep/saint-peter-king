@@ -25,17 +25,20 @@ class PedidosTableSeeder extends Seeder
                 'NF' => 123456789,
             ]);
 
-            $pedido = Pedido::firstOrFail();
+            $pedido =  $cliente->pedidos->first();
 
-            $pedido->formaPagamento()->associate(FormaPagamento::find(1));
+            $pedido->formaPagamento()->associate(FormaPagamento::find(rand(1,3)));
             $pedido->tipoEntrega()->associate(TipoEntrega::find(1));
-            $pedido->status()->associate(StatusPedido::find(1));
+            $pedido->status()->associate(StatusPedido::find(rand(1,4)));
+
 
             //Acrescenta os produtos aos pedidos
             $pedido->produtos()->attach([
                 1 => ['pesoSaida' => 10,'precoUnitario' => 10],
                 2 => ['pesoSaida' => 10,'precoUnitario' => 10]
             ]);
+
+            $pedido->save();
         }
     }
 

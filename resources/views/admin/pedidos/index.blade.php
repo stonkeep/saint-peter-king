@@ -49,8 +49,8 @@
             @foreach($data as $item)
                 <tr>
                     <td>{{$item->id}}</td>
-                    <td>{{$item->nome}}</td>
-                    <td>{{$item->descricao}}</td>
+                    <td>{{$item->cliente->nome}}</td>
+                    <td>{{$item->status->descricao}}</td>
                     <td>{{$item->created_at}}</td>
                     <td><a class="btn btn-danger" href="{{route('pedidos.delete', [$item->id])}}">Excluir</a></td>
                     <td><a class="btn btn-success" href="{{route('pedidos.edit', [$item->id])}}">Editar</a></td>

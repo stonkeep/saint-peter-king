@@ -14,7 +14,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $data = Pedido::all();
+        //Usado aqui o Eager loading do Laravel para trazer já os dados do cliente
+        $data = Pedido::with(['cliente', 'status'])->get();
         return view('admin.pedidos.index', compact('data'));
     }
 

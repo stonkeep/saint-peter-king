@@ -54,17 +54,17 @@ class Pedido extends Model
 
     public function formaPagamento()
     {
-        return $this->belongsTo('App\FormaPagamento', 'id');
+        return $this->belongsTo('App\FormaPagamento');
     }
 
     public function tipoEntrega()
     {
-        return $this->belongsTo('App\TipoEntrega', 'id');
+        return $this->belongsTo('App\TipoEntrega');
     }
 
     public function status()
     {
-        return $this->belongsTo('App\StatusPedido', 'id');
+        return $this->belongsTo('App\StatusPedido');
     }
 
 }
