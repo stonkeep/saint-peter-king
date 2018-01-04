@@ -4,7 +4,7 @@
 @section('title', 'Premio')
 
 @section('content_header')
-    <h1>Premio</h1>
+    <h1>Pedido</h1>
 @stop
 
 @section('content')
@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <div id="app">
-        <pedido :pedido="{{$pedido}}"></pedido>
+        <pedido :pedido="{{$pedido}}" :status="{{$status}}" :entregas="{{$tipoEntregas}}"></pedido>
     </div>
 
 @stop
