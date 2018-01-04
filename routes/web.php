@@ -44,4 +44,8 @@ Route::prefix('admin')->group(function () {
     //Route Pedidos
     Route::resource('pedidos', 'PedidoController');
     Route::get('/pedidos/delete/{pedido}', ['as' => 'pedidos.delete', 'uses' => 'PedidoController@destroy']);
+
+    //Route Status pedido
+    Route::resource('status', 'StatusPedidoController');
+    Route::get('/status/delete/{status}', ['as' => 'status.delete', 'uses' => 'StatusPedidoController@destroy']);
 });
