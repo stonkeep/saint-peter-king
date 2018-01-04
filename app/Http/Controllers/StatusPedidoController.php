@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class StatusPedidoController extends Controller
 {
+    //TODO fazer o CRUD
     /**
      * Display a listing of the resource.
      *

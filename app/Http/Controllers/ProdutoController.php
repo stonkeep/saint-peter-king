@@ -14,7 +14,11 @@ class ProdutoController extends Controller
      */
     public function index()
     {
+        //TODO fazer esquema de paginação
+        //busca todas os produtos na tabela
         $data = Produto::all();
+
+        //Retorna a view com os dados necessários
         return view('admin.produtos.index', compact('data'));
     }
 
@@ -25,7 +29,10 @@ class ProdutoController extends Controller
      */
     public function create()
     {
+        //Cria objeto em branco
         $produto = new Produto();
+
+        //Retorna a view com os dados necessários
         return view('admin.produtos.create', compact('produto'));
     }
 
@@ -37,6 +44,7 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+        //Valida os dados informados
         $this->validate($request,
             [
                 "nome" => "required:string",
@@ -46,8 +54,15 @@ class ProdutoController extends Controller
             ]
         );
 
+        try {
+            //Grava novo produto na tabela
+            Produto::create($request->all());
 
-        Produto::create($request->all());
+            //Mostra mensagem na tela
+            flash('registro cadastrado com sucesso')->success();
+        } catch (\Exception $e) {
+            return response('Não foi possível gravar resgistro: ' . $e->getMessage(), 500);
+        }
     }
 
     /**
@@ -69,6 +84,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
+        //Retorna a view com os dados necessários
         return view('admin.produtos.edit', compact('produto'));
     }
 
@@ -81,9 +97,7 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-//        $produto = Produto::find($id);
-        var_dump($produto);
-
+        //Valida dados informados
         $this->validate(request(), [
             "nome" => "required:string",
             "descricao" => "required:string",
@@ -91,7 +105,10 @@ class ProdutoController extends Controller
             "preco_unitario" => "required:numeric",
         ]);
 
+        //Atualiza dado na tabela
         $produto->update($request->all());
+
+        //Mostra mensagem na tela
         flash('Vigência atualizado com sucesso')->success();
     }
 
@@ -103,9 +120,13 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
+        //Deleta registro na tabela
         $produto->delete();
+
+        //Mostra mensagem na tela
         flash('Vigência deletado com sucesso')->success();
 
+        //Redirect para a lista de produtos
         return redirect(route('produtos.index'));
     }
 }

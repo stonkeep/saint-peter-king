@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class EnderecoController extends Controller
 {
+    //TODO fazer o crud completo
     /**
      * Display a listing of the resource.
      *

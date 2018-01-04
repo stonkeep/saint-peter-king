@@ -15,7 +15,10 @@ class FormaPagamentoController extends Controller
      */
     public function index()
     {
+        //busca todas as formas de pagamento
         $data = FormaPagamento::all();
+
+        //Retorna a view com os dados necessários
         return view('admin.pagamentos.index', compact("data"));
     }
 
@@ -26,7 +29,10 @@ class FormaPagamentoController extends Controller
      */
     public function create()
     {
+        //Cria um objeto vazio para não dar problema no componente
         $pagamento = new FormaPagamento();
+
+        //Retorna a view com os dados necessários
         return view("admin.pagamentos.create", compact('pagamento'));
     }
 
@@ -38,17 +44,27 @@ class FormaPagamentoController extends Controller
      */
     public function store(Request $request)
     {
+        //Valida os dados informados
         $request->validate([
             "descricao" => "required"
         ]);
 
+
+        //TEnta fazer a criação no banco de dados
         try {
+            //Grava no forma de pagamento na tabela
             FormaPagamento::create($request->all());
+
+            //mostra mensagem na tela
+            flash('Dados cadastrado com sucesso');
+
         } catch (\Exception $e) {
+
             //Se de erro mostra na tela a mensagem
             flash($e->getMessage())->error();
             return response('Algo deu errado. Favor verificar', 500)->header('Content-Type', 'text/plain');
         }
+
 
 
     }
@@ -72,6 +88,7 @@ class FormaPagamentoController extends Controller
      */
     public function edit(FormaPagamento $pagamento)
     {
+        //Retorna a view com os dados necessários
         return view('admin.pagamentos.edit', compact('pagamento'));
     }
 
@@ -89,7 +106,12 @@ class FormaPagamentoController extends Controller
         ]);
 
         try {
+            //Atualiza dados na tabela
             $pagamento->update($request->all());
+
+            //Mostra mensagem na tela
+            flash('Dados gravados com sucesso');
+
         } catch (\Exception $exception) {
             return response('Não foi possível fazer o update: ' . $exception->getMessage());
         }
@@ -104,12 +126,17 @@ class FormaPagamentoController extends Controller
     public function destroy(FormaPagamento $pagamento)
     {
         try {
+            //Faz delete na tabela
             $pagamento->delete();
+
+            //Mostra mensagem na tela
+            flash('registro apagado com sucesso')->success();
+
         } catch (\Exception $exception) {
             flash('Não foi possível deletar o registro: '. $exception->getMessage())->error();
         }
 
-        flash('registro apagado com sucesso')->success();
+        //redirect para a lista de pagamentos mesmo se o mesmo não deu certo
         return redirect()->route('pagamentos.index');
     }
 }
