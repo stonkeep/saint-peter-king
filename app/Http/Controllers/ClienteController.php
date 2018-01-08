@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\cliente;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -44,6 +46,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        //TODO fazer validação de CNPJ ou CPF
         //Valida os dados informados
         $this->validate($request, [
             //CPF ou CPNJ é obrigatório e tem que ser unico na tabela
@@ -98,9 +101,33 @@ class ClienteController extends Controller
      * @param  \App\cliente  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, cliente $empresa)
+    public function update(Request $request, cliente $cliente)
     {
-        //TODO falta fazer
+        //Valida os dados informados
+        $this->validate($request, [
+            'id' => 'required',
+            //CPF ou CPNJ é obrigatório e tem que ser unico na tabela
+            'cpf_cnpj' => 'required',
+            'nome' => 'required',
+            'telefone' => 'required',
+        ]);
+
+        try {
+            DB::transaction(function () use ($request, $cliente) {
+                $cliente->update($request->all());
+            });
+
+            //Se atualizou sem problema no banco de dadso mostra mensagem na tela
+            flash('Registro atualizado com sucesso')->success();
+        } catch (QueryException $e) {
+            //Se der erro mostra mensagem na tela
+            flash('Registro não pode ser atualizado: ' . $e->getMessage())->error();
+        } catch (\Exception $e) {
+            //Se der erro mostra mensagem na tela
+            flash('Registro não pode ser atualizado: ' . $e->getMessage())->error();
+        }
+
+
     }
 
     /**
@@ -109,8 +136,28 @@ class ClienteController extends Controller
      * @param  \App\cliente  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(cliente $empresa)
+    public function destroy(cliente $cliente)
     {
-        //TODO falta fazer
+        //Tenta fazer o delete do pedido
+        try {
+
+            DB::transaction(function () use ($cliente) {
+                //Faz o delete
+                $cliente->delete();
+            });
+
+            //Se o delete deu certo apresenta mensagem na tela
+            flash('Registro deletado com sucesso')->success();
+
+        } catch (QueryException $e) {
+            //Se der erro mostra mensagem na tela
+            flash('Registro não pode ser deletado: ' . $e->getMessage())->error();
+        } catch (\Exception $e) {
+            //Se não foi possível fazer o delete apresenta uma mensagem de erro na tela
+            flash('Não foi possível deletar o registro: ' . $e->getMessage())->error();
+        }
+
+        //De qualquer forma faz o redirect para a lista de pedidos
+        return redirect()->route('clientes.index');
     }
 }

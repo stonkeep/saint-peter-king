@@ -2,7 +2,7 @@
 
 @extends('adminlte::page')
 
-@section('title', 'Produtos')
+@section('title', 'Clientes')
 
 @section('content_header')
     <h1>Clientes</h1>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pedido;
 use App\StatusPedido;
 use App\TipoEntrega;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -139,6 +140,7 @@ class PedidoController extends Controller
     public function update(Request $request, pedido $pedido)
     {
         try {
+            //Abre DB:transaction se não conseguir fazer algum comando no DB faz o rollback automático
             DB::transaction(function () use ($request, $pedido) {
 
                 //Atualiza NF
@@ -184,8 +186,11 @@ class PedidoController extends Controller
             //Se o delete deu certo apresenta mensagem na tela
             flash('Registro deletado com sucesso')->success();
 
-        } catch (\Exception $e) {
+        } catch (QueryException $e) {
             //Se não foi possível fazer o delete apresenta uma mensagem de erro na tela
+            flash('Não foi possível deletar o registro: ' . $e->getMessage())->error();
+        } catch (\Exception $e) {
+                //Se não foi possível fazer o delete apresenta uma mensagem de erro na tela
             flash('Não foi possível deletar o registro: ' . $e->getMessage())->error();
         }
 

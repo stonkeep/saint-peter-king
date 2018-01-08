@@ -5,7 +5,9 @@ namespace Tests\Unit;
 use App\Cliente;
 use App\Endereco;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,8 +22,8 @@ class ClienteTest extends TestCase
         parent::setUp();
     }
 
-
     private $user;
+
     public function criaUsuario()
     {
         //Cria Usuáiro
@@ -86,13 +88,16 @@ class ClienteTest extends TestCase
         $this->assertEquals( $this->user->name, $cliente->user->name);
 
         //Testa UPDATE
-        $cliente->nome = "Arthur";
-        $cliente->save();
+
         $cliente = Cliente::first();
+        $cliente->nome = "Arthur";
         //verifica
         $this->assertEquals("Arthur", $cliente->nome);
 
+
+
         //Testa Delete
+
          $this->user->cliente()->delete();
         //Tenta achar o cliente no banco de dados
         $cliente = Cliente::first();
