@@ -27,4 +27,7 @@ class EnderecoTest extends TestCase
     {
         $this->assertTrue(true);
     }
+    //TODO teste de validação
+
+
 }

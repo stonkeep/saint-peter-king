@@ -98,4 +98,6 @@ class StatusPedidoTest extends TestCase
         $this->assertNull($status);
 
     }
+    //TODO teste de validação
+
 }

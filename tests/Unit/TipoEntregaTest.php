@@ -38,4 +38,6 @@ class TipoEntregaTest extends TestCase
         $this->assertEmpty(TipoEntrega::first());
 
     }
+    //TODO teste de validação
+
 }

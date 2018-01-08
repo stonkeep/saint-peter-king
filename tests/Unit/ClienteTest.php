@@ -7,6 +7,7 @@ use App\Endereco;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 use Tests\TestCase;
@@ -30,6 +31,8 @@ class ClienteTest extends TestCase
         factory(User::class)->create();
         //Recupera usuário criado
         $this->user = User::first();
+        //Loga usuário no sistema
+        Auth::login($this->user);
         //Verifica se o usuário existe mesmo
         $this->assertNotNull($this->user);
     }
@@ -177,4 +180,52 @@ class ClienteTest extends TestCase
         $this->assertNotEmpty($endereco);
 
     }
+
+    /**
+     * @test
+     */
+    public function testeCrudFrontEnd()
+    {
+        //Cria usuário para vincular o cliente
+        $this->criaUsuario();
+
+        //Chama post para criar cliente
+        $this->json('POST', 'admin/clientes', [
+            'cpf_cnpj' => 11111111111,
+            'nome' => "Jose",
+            'telefone' => 123456789,
+        ]);
+
+        //Testa o GET para verificar se cliente existe
+        $response = $this->json('GET', 'admin/clientes');
+
+        //Verifica se cliente foi criado
+        $response->assertSee("Jose");
+
+        //Busca cliente no banco de dados
+        $cliente = Cliente::firstOrFail();
+
+        $cliente->nome = "Mateus o lindo";
+        $response = $this->json('PUT', "admin/clientes/{$cliente->id}", $cliente->toArray());
+
+        //Verifica se retornou ok
+        $response->assertStatus(200);
+
+        //Veriica se cliente foi alterado
+        $this->assertEquals($cliente->nome, Cliente::firstOrFail()->nome);
+
+        //Deleta resgistro da tabela
+        $response = $this->json('DELETE', "admin/clientes/{$cliente->id}");
+
+        //Verifica se a resposta vai ser um redirecionamento
+        $response->assertStatus(302);
+
+        //busca registro no banco de dados
+        $cliente = Cliente::first();
+
+        //Verifica se não foi mesmo achado o registro
+        $this->assertNull($cliente);
+    }
+
+    //TODO teste de validação
 }

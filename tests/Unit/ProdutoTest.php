@@ -51,4 +51,7 @@ class ProdutoTest extends TestCase
         $response->assertDontSee("Peixe qualquer");
     }
 
+    //TODO teste de validação
+
+
 }

@@ -138,4 +138,6 @@ class PedidoTest extends TestCase
     }
 
     //TODO fazer o front end e testar
+    //TODO teste de validação
+
 }

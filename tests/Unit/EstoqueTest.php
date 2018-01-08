@@ -40,4 +40,7 @@ class EstoqueTest extends TestCase
         $this->assertNotNull($produto->estoque());
 
     }
+    //TODO teste de validação
+
+
 }
