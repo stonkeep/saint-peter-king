@@ -9,6 +9,13 @@ use Tests\TestCase;
 class StatusPedidoTest extends TestCase
 {
     use DatabaseMigrations;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+    }
+
     /**
      * A basic test example.
      *
@@ -37,5 +44,58 @@ class StatusPedidoTest extends TestCase
         //Verifica se foi deletado mesmo
         $this->assertEmpty(StatusPedido::first());
     }
-    //TODO front end admin
+
+    /**
+     * @test
+     */
+    public function testeCrudFrontEnd()
+    {
+        //Cria Status de pedido fia POST
+        $this->json('POST', 'admin/status', [
+            'descricao' => 'pedido recebido'
+        ]);
+
+        //Testa GET
+        $response = $this->json('GET', 'admin/status');
+
+        //verifica se resgistro esta na tela
+        $response->assertSee('pedido recebido');
+
+        //Busca status no banco de dados para ver se gravou mesmo
+        $status = StatusPedido::firstOrFail();
+
+        //Verifica se não é nulo
+        $this->assertNotNull($status);
+
+        //Verifica se o dado gravado foi realmente o passado
+        $this->assertEquals('pedido recebido', $status->descricao);
+
+        //Atualiza pedido
+        $this->json('PUT', "admin/status/{$status->id}", [
+            'descricao' => 'Entregue'
+        ]);
+
+        //Busca status no banco de dados para ver se gravou mesmo
+        $status = StatusPedido::firstOrFail();
+
+        //verifica se o registro foi alterado
+        $this->assertEquals('Entregue', $status->descricao);
+        $this->assertNotEquals('pedido recebido', $status->descricao);
+
+        //Testa delete
+        $this->json('DELETE', "admin/status/{$status->id}");
+
+        //Busca index da lista de status
+        $response = $this->json('GET', 'admin/status');
+
+        //Verifica se registro não aparece na tela
+        $response->assertDontSee('Entregue');
+
+        //Busca registro no banco de dados
+        $status = StatusPedido::first();
+
+        //Verifica se status esta nulo logo foi deletado
+        $this->assertNull($status);
+
+    }
 }

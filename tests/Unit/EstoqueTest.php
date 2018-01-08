@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Estoque;
 use App\Produto;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -35,6 +36,8 @@ class EstoqueTest extends TestCase
         $produto->estoque()->create([
             'quantidade' => 10,
         ]);
+
+        $this->assertNotNull($produto->estoque());
 
     }
 }
