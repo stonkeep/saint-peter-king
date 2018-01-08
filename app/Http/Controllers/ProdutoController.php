@@ -49,8 +49,8 @@ class ProdutoController extends Controller
             [
                 "nome" => "required:string",
                 "descricao" => "required:string",
-                "peso_unitario" => "required:numeric",
-                "preco_unitario" => "required:numeric",
+                "pesoUnitario" => "required:numeric",
+                "precoUnitario" => "required:numeric",
             ]
         );
 
@@ -101,8 +101,8 @@ class ProdutoController extends Controller
         $this->validate(request(), [
             "nome" => "required:string",
             "descricao" => "required:string",
-            "peso_unitario" => "required:numeric",
-            "preco_unitario" => "required:numeric",
+            "pesoUnitario" => "required:numeric",
+            "precoUnitario" => "required:numeric",
         ]);
 
         //Atualiza dado na tabela

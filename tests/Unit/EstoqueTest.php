@@ -36,6 +36,5 @@ class EstoqueTest extends TestCase
             'quantidade' => 10,
         ]);
 
-        dd($produto->estoque()->first());
     }
 }

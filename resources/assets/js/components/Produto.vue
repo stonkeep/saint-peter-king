@@ -24,22 +24,22 @@
             </div>
 
             <!--Peso Unitário-->
-            <div class="form-group" :class="{ 'has-error': form.errors.has('peso_unitario') }">
-                <label for="peso_unitario" class="col-md-3 control-label">Peso Unitário: </label>
+            <div class="form-group" :class="{ 'has-error': form.errors.has('pesoUnitario') }">
+                <label for="pesoUnitario" class="col-md-3 control-label">Peso Unitário: </label>
                 <div class="col-md-6">
-                    <input v-model="form.peso_unitario" type="number" name="peso_unitario" id="peso_unitario"
+                    <input v-model="form.pesoUnitario" type="number" name="pesoUnitario" id="pesoUnitario"
                               class="form-control">
-                    <has-error :form="form" field="peso_unitario"></has-error>
+                    <has-error :form="form" field="pesoUnitario"></has-error>
                 </div>
             </div>
 
             <!--Preço Unitário-->
-            <div class="form-group" :class="{ 'has-error': form.errors.has('preco_unitario') }">
-                <label for="preco_unitario" class="col-md-3 control-label">Preço Unitário: </label>
+            <div class="form-group" :class="{ 'has-error': form.errors.has('precoUnitario') }">
+                <label for="precoUnitario" class="col-md-3 control-label">Preço Unitário: </label>
                 <div class="col-md-6">
-                    <input v-model="form.preco_unitario" type="number" name="preco_unitario" id="preco_unitario"
+                    <input v-model="form.precoUnitario" type="number" name="precoUnitario" id="precoUnitario"
                            class="form-control">
-                    <has-error :form="form" field="preco_unitario"></has-error>
+                    <has-error :form="form" field="precoUnitario"></has-error>
                 </div>
             </div>
 
@@ -62,8 +62,8 @@
                     id: this.produto.id,
                     descricao: this.produto.descricao,
                     nome: this.produto.nome,
-                    peso_unitario: this.produto.peso_unitario,
-                    preco_unitario: this.produto.preco_unitario,
+                    pesoUnitario: this.produto.pesoUnitario,
+                    precoUnitario: this.produto.precoUnitario,
                 })
             }
         },

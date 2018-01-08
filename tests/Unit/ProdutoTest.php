@@ -19,9 +19,10 @@ class ProdutoTest extends TestCase
         $this->json('POST', "/admin/produtos/", [
             'nome' => "Tilápia",
             'descricao' => "tilápia fresca",
-            'peso_unitario' => 1,
-            'preco_unitario' => 10,
+            'pesoUnitario' => 1,
+            'precoUnitario' => 10,
         ]);
+
 
         $produto = Produto::firstOrFail();
 
@@ -36,8 +37,8 @@ class ProdutoTest extends TestCase
         $response = $this->json('PUT', "admin/produtos/{$produto->id}", [
             'nome' => "Peixe qualquer",
             'descricao' => "tilápia fresca",
-            'peso_unitario' => 1,
-            'preco_unitario' => 10,
+            'pesoUnitario' => 1,
+            'precoUnitario' => 10,
         ]);
         //Verifica se update foi feito
         $response = $this->json('GET', "/admin/produtos");
