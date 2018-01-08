@@ -3,6 +3,7 @@
         <form @submit.prevent="submit" @keydown="form.errors.clear($event.target.name)" class="form-horizontal">
             <alert-error :form="form"></alert-error>
 
+
             <!--Descrição-->
             <div class="form-group" :class="{ 'has-error': form.errors.has('descricao') }">
                 <label for="descricao" class="col-md-3 control-label">Descrição: </label>
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-    import {Form, HasError, AlertError} from 'vform'
+    import {Form, HasError, AlertError, AlertErrors} from 'vform'
 
     export default {
         data() {
@@ -32,7 +33,7 @@
                 form: new Form({
                     id: this.status.id,
                     descricao: this.status.descricao,
-                })
+                }),
             }
         },
         props: ['status'],
@@ -41,19 +42,28 @@
         },
         methods: {
             submit () {
-                // Submit the form via a POST request
+                // Submit the form via a PUT request
                 let location = window.location.href;
                 if (location.indexOf("edit") > -1) {
-                    console.log(this.form.id);
-                    this.form.put('/admin/statuss/'+ this.form.id)
+                    this.form.put('/admin/status/'+ this.form.id)
                         .then(({data}) => {
-                            window.location.href = '/admin/statuss'
+                            window.location.href = '/admin/status'
                         })
+                        .catch((error) => {
+                            this.form.errors.errors.error = error.response.data;
+                        });
                 } else {
-                    this.form.post('/admin/statuss')
-                        .then(({data}) => {
-                            window.location.href = '/admin/statuss'
+                    // Submit the form via a POST request
+                    this.form.post('/admin/status')
+                        .then((response) => {
+                            console.log(response);
+                            if (this.form.successful===true && response.status===200){
+                                window.location.href = '/admin/status'
+                            };
                         })
+                        .catch((error) => {
+                            this.form.errors.errors.error = error.response.data;
+                        });
                 }
 
             },

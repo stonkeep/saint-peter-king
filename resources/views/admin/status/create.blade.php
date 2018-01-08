@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <div id="app">
-        <forma-status :status="{{$status}}"></forma-status>
+        <status :status="{{$status}}"></status>
     </div>
 
 @stop

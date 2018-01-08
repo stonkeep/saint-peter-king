@@ -47,6 +47,8 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         //TODO fazer validação de CNPJ ou CPF
+        //TODO validar formato de telefone
+
         //Valida os dados informados
         $this->validate($request, [
             //CPF ou CPNJ é obrigatório e tem que ser unico na tabela

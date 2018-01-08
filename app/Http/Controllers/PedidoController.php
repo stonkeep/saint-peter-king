@@ -64,6 +64,8 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        //TODO adicionar produtos
+
         $this->validate($request, [
             'NF' => 'required',
             'impressaoDeComprovante' => 'required',

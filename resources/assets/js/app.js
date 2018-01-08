@@ -19,6 +19,7 @@ Vue.component('produto', require('./components/Produto.vue'));
 Vue.component('pedido', require('./components/Pedido.vue'));
 Vue.component('cliente', require('./components/Cliente.vue'));
 Vue.component('forma-pagamento', require('./components/FormaPagamento.vue'));
+Vue.component('status', require('./components/StatusPedido.vue'));
 
 const app = new Vue({
     el: '#app'

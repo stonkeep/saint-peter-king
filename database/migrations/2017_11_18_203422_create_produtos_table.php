@@ -20,6 +20,8 @@ class CreateProdutosTable extends Migration
             $table->double("pesoUnitario");
             $table->double("precoUnitario");
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

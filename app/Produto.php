@@ -28,4 +28,9 @@ class Produto extends Model
 
     protected $guarded = [];
 
+    public function estoque()
+    {
+       return $this->hasMany("App\Estoque");
+    }
+
 }
