@@ -2,6 +2,8 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,11 +15,15 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //Cria usuário padrão admin
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com.br',
-            'password' => 123456
+        $user = \App\User::create([
+            'name'           => 'admin',
+            'email'          => 'admin@admin.com.br',
+            'password'       => $password = '123456',
+            'remember_token' => str_random(10),
         ]);
+        $role = Role::where('name', 'Admin');
+        $p = Permission::where('name', 'Cargos');
+        $user->roles()->sync(1);
 
         //Cria usuários genéricos
         factory(User::class, 10)->create();

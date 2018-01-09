@@ -11,7 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UsersTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        if (App::environment('local')) {
+            $this->call(UsersTableSeeder::class);
+        }
          $this->call(StatusPedidoTableSeeder::class);
          $this->call(TipoEntregaTableSeeder::class);
          $this->call(FormaPagamentoTableSeeder::class);
