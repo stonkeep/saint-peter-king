@@ -19,13 +19,5 @@ class RolesTableSeeder extends Seeder
         foreach ($permissions as $permission) {
             $role->givePermissionTo($permission);
         }
-        $permissions = Permission::find([1, 2]);
-        $role = Role::create([
-            'name' => 'GECOM',
-            'guard_name' => 'web'
-        ]);
-        foreach ($permissions as $permission) {
-            $role->givePermissionTo($permission);
-        }
     }
 }

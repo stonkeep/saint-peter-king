@@ -21,10 +21,8 @@ class UsersTableSeeder extends Seeder
             'password'       => $password = '123456',
             'remember_token' => str_random(10),
         ]);
-        $role = Role::where('name', 'Admin');
-        $p = Permission::where('name', 'Cargos');
-        $user->roles()->sync(1);
 
+        $user->assignRole('Admin');
         //Cria usuários genéricos
         factory(User::class, 10)->create();
     }
