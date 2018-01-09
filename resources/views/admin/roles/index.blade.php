@@ -1,7 +1,10 @@
-{{-- \resources\views\roles\index.blade.php --}}
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('title', '| Roles')
+@section('title', 'Status')
+
+@section('content_header')
+    <h1>status</h1>
+@stop
 
 @section('content')
 
@@ -47,4 +50,25 @@
 
     </div>
 
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/app.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+@stop
+
+@section('js')
+    <script src="/js/manifest.js"></script>
+    <script src="/js/vendor.js"></script>
+    <script src="/js/app.js"></script>
+    {{--<script>--}}
+    {{--$('table').bootstrapTable({--}}
+    {{--cache: false,--}}
+    {{--height: 500,--}}
+    {{--striped: true,--}}
+    {{--searchTimeOut: 10--}}
+    {{--});--}}
+    {{--</script>--}}
+@stop

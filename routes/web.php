@@ -48,4 +48,15 @@ Route::prefix('admin')->group(function () {
     //Route Status pedido
     Route::resource('status', 'StatusPedidoController');
     Route::get('/status/delete/{status}', ['as' => 'status.delete', 'uses' => 'StatusPedidoController@destroy']);
+
+    //Permissões
+    Route::resource('users', 'UserController');
+    Route::resource('roles', 'RoleController');
+    Route::resource('permissions', 'PermissionController');
+
 });
+
+
+
+
+
