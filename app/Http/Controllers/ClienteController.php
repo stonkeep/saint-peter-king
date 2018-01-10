@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\cliente;
+use App\Cliente;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +12,7 @@ class ClienteController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+ *
      * @return \Illuminate\Http\Response
      */
     public function index()
