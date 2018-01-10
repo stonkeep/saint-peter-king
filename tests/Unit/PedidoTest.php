@@ -83,6 +83,8 @@ class PedidoTest extends TestCase
         ]);
 
 
+
+
         //Busca o pedido gravado
         $pedido = Pedido::firstOrFail();
         $pedido->formaPagamento()->associate(FormaPagamento::find(1));
@@ -97,7 +99,9 @@ class PedidoTest extends TestCase
 
         //Verifica se foi gravado o pedido
         $this->assertNotEmpty($cliente->pedidos()->first()->produtos);
-
+        $this->assertEquals($pedido->formaPagamento, FormaPagamento::find(1));
+        $this->assertEquals($pedido->tipoEntrega, TipoEntrega::find(1));
+        $this->assertEquals($pedido->status, StatusPedido::find(1));
 
         //testa update na forma de pagamento
         $pedido = $cliente->pedidos()->first();

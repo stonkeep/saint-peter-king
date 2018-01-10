@@ -26,6 +26,7 @@ class CreatePedidosTable extends Migration
             $table->integer('status_id')->unsigned()->nullable();
             $table->foreign('status_id')->references('id')->on('status_pedidos');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

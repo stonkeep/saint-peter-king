@@ -23,7 +23,7 @@ Route::prefix('admin')->group(function () {
 
     //Rora Clientes
     Route::resource('clientes', 'ClienteController');
-    Route::get('/clientes/delete/{cliente}', ['as' => 'clientes.delete', 'uses' => 'ClienteController@destroy']); //TODO testar essa parte
+    Route::get('/clientes/delete/{cliente}', ['as' => 'clientes.delete', 'uses' => 'ClienteController@destroy']);
 
 
 //    Route Produtos

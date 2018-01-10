@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <div id="app">
-        <pedido :pedido="{{$pedido}}" :status="{{$status}}" :entregas="{{$tipoEntregas}}"></pedido>
+        <pedido :pedido="{{$pedido}}" :status="{{$status}}" :entregas="{{$tipoEntregas}}" :formasPagamentos="{{$formasPagamentos}}"></pedido>
     </div>
 
 @stop

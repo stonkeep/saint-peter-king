@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FormaPagamento;
 use App\Pedido;
 use App\StatusPedido;
 use App\TipoEntrega;
@@ -14,6 +15,7 @@ class PedidoController extends Controller
 
     private $status;
     private $tipoEntregas;
+    private $formasPagamentos;
 
 
     public function __construct()
@@ -23,6 +25,9 @@ class PedidoController extends Controller
 
         //Busca os tipos de entrega na tabela - Vai ser nescessário no front end
         $this->tipoEntregas = TipoEntrega::all();
+
+        //Busca os formas de pagamentos na tabela - Vai ser nescessário no front end
+        $this->formasPagamentos = FormaPagamento::all();
     }
 
     /**
@@ -33,7 +38,10 @@ class PedidoController extends Controller
     public function index()
     {
         //Usado aqui o Eager loading do Laravel para trazer já os dados do cliente e o status do pedido
-        $data = Pedido::with(['cliente', 'status'])->get();
+        $data = Pedido::with(['cliente' => function ($c) {
+            $c->withTrashed();
+        },
+            'status'])->get();
 
         return view('admin.pedidos.index', compact('data'));
     }
@@ -127,9 +135,10 @@ class PedidoController extends Controller
         //Carrega tipos de estatus e tipos de entregas
         $status = $this->status;
         $tipoEntregas = $this->tipoEntregas;
+        $formasPagamentos = $this->formasPagamentos;
 
         //retorna view da tela de edição com os dados nescessários
-        return view('admin.pedidos.edit', compact('pedido', 'status', 'tipoEntregas'));
+        return view('admin.pedidos.edit', compact('pedido', 'status', 'tipoEntregas', 'formasPagamentos'));
     }
 
     /**

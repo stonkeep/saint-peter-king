@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Pedido
@@ -34,6 +35,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pedido extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
     protected $guarded = [];
 
 

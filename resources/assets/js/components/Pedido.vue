@@ -41,6 +41,19 @@
                 </div>
             </div>
 
+            <!--Forma de Pagamento-->
+            <div class="form-group" :class="{ 'has-error': form.errors.has('formaPagamento') }">
+                <label for="formaPagamento" class="col-md-3 control-label">Tipo de Entrega: </label>
+                <div class="col-md-6">
+                    <select v-model="form.formaPagamento"  name="formaPagamento" id="formaPagamento" class="form-control">
+                        <option v-for="forma in formasPagamentos" v-bind:value="forma.id">
+                            {{ forma.descricao }}
+                        </option>
+                    </select>
+                    <has-error :form="form" field="formaPagamento"></has-error>
+                </div>
+            </div>
+
             <!--status-->
             <div class="form-group" :class="{ 'has-error': form.errors.has('status') }">
                 <label for="status" class="col-md-3 control-label">status: </label>
@@ -81,13 +94,12 @@
                     impressaoDeComprovante: this.pedido.impressaoDeComprovante,
                     NF: this.pedido.NF,
                     tipoEntrega: this.pedido.tipo_entrega_id,
+                    formaPagamento: this.pedido.formaPagamento,
                     status: this.pedido.status_id,
-
-//                    TODO falta forma de pagamento
                 })
             }
         },
-        props: ['pedido','status', 'entregas'],
+        props: ['pedido','status', 'entregas', 'formasPagamentos'],
         mounted() {
             console.log('Component mounted.');
         },
