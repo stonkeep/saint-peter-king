@@ -43,10 +43,10 @@
 
             <!--Forma de Pagamento-->
             <div class="form-group" :class="{ 'has-error': form.errors.has('formaPagamento') }">
-                <label for="formaPagamento" class="col-md-3 control-label">Tipo de Entrega: </label>
+                <label for="formaPagamento" class="col-md-3 control-label">Forma de pagamento: </label>
                 <div class="col-md-6">
                     <select v-model="form.formaPagamento"  name="formaPagamento" id="formaPagamento" class="form-control">
-                        <option v-for="forma in formasPagamentos" v-bind:value="forma.id">
+                        <option v-for="forma in formaspagamentos" v-bind:value="forma.id">
                             {{ forma.descricao }}
                         </option>
                     </select>
@@ -94,12 +94,12 @@
                     impressaoDeComprovante: this.pedido.impressaoDeComprovante,
                     NF: this.pedido.NF,
                     tipoEntrega: this.pedido.tipo_entrega_id,
-                    formaPagamento: this.pedido.formaPagamento,
+                    formaPagamento: this.pedido.forma_pagamento_id,
                     status: this.pedido.status_id,
                 })
             }
         },
-        props: ['pedido','status', 'entregas', 'formasPagamentos'],
+        props: ['pedido','status', 'entregas', 'formaspagamentos'],
         mounted() {
             console.log('Component mounted.');
         },
@@ -119,7 +119,8 @@
                     this.form.post('/admin/pedidos')
                         .then((response) => {
                         if (this.form.successful===true && response.data.id){
-                            window.location.href = '/admin/pedidos'
+                                                            console.log(this.form);
+//                            window.location.href = '/admin/pedidos'
                             };
                         })
                 }

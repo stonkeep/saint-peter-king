@@ -11,9 +11,8 @@
 
     @include('admin.layouts.erros')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <div id="app">
-        <pedido :pedido="{{$pedido}}" :status="{{$status}}" :entregas="{{$tipoEntregas}}" :formasPagamentos="{{$formasPagamentos}}"></pedido>
+        <pedido :pedido="{{$pedido}}" :status="{{$status}}" :entregas="{{$tipoEntregas}}" :formaspagamentos="{{$formasPagamentos}}"></pedido>
     </div>
 
 @stop

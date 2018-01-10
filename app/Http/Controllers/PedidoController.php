@@ -59,9 +59,10 @@ class PedidoController extends Controller
         //Carrega tipos de estatus e tipos de entregas
         $status = $this->status;
         $tipoEntregas = $this->tipoEntregas;
+        $formasPagamentos = $this->formasPagamentos;
 
         //Chama a view de create com as variaveis nescessárias
-        return view('admin.pedidos.create', compact('pedido', 'status', 'tipoEntregas'));
+        return view('admin.pedidos.create', compact('pedido', 'status', 'tipoEntregas', 'formasPagamentos'));
     }
 
     /**
@@ -73,13 +74,14 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
         //TODO adicionar produtos
-
         $this->validate($request, [
             'NF' => 'required',
             'impressaoDeComprovante' => 'required',
             'status' => 'required',
             'tipoEntrega' => 'required',
+            'formaPagamento' => 'required'
         ]);
+
 
         $idRetorn = DB::transaction(function () use ($request) {
             //Busca o cliente que esta logado
@@ -93,8 +95,12 @@ class PedidoController extends Controller
 
             //Associa tipo de entrega informado com o pedido
             $pedido->tipoEntrega()->associate(TipoEntrega::find($request->tipoEntrega));
+
             //Associa status informado com o pedido
             $pedido->status()->associate(StatusPedido::find($request->status));
+
+            //Associa status informado com o pedido
+            $pedido->status()->associate(FormaPagamento::find($request->formaPagamento));
 
             //Salva as alterações
             $pedido->save();
@@ -150,9 +156,20 @@ class PedidoController extends Controller
      */
     public function update(Request $request, pedido $pedido)
     {
+
+//        Valida entrada
+        $this->validate($request, [
+            'NF' => 'required',
+            'impressaoDeComprovante' => 'required',
+            'status' => 'required',
+            'tipoEntrega' => 'required',
+            'formaPagamento' => 'required'
+        ]);
+
+
         try {
             //Abre DB:transaction se não conseguir fazer algum comando no DB faz o rollback automático
-            DB::transaction(function () use ($request, $pedido) {
+//            DB::transaction(function () use ($request, $pedido) {
 
                 //Atualiza NF
                 $pedido ->NF =  $request->NF;
@@ -166,12 +183,18 @@ class PedidoController extends Controller
                 //Associa status informado com o pedido
                 $pedido->status()->associate(StatusPedido::find($request->status));
 
+                //Atualiza forma de pagamento
+                $pedido->formaPagamento()->associate(FormaPagamento::find($request->formaPagamento));
+
+
                 //Salva as alterações
                 $pedido->save();
 
-                //OBS: Como pedido não pode mudar de lciente não fiz essa atualização
 
-            });
+                //OBS: Como pedido não pode mudar de cliente não fiz essa atualização
+
+//            });
+
             //Se atualizou sem problema no banco de dadso mostra mensagem na tela
             flash('Registro atualizado com sucesso')->success();
 
@@ -179,6 +202,8 @@ class PedidoController extends Controller
             //Se der erro mostra mensagem na tela
             flash('Registro não pode ser atualizado: ' . $e->getMessage())->error();
         }
+
+
     }
 
     /**

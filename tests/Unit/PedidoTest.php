@@ -14,11 +14,13 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\ValidationsFields;
 
 class PedidoTest extends TestCase
 {
     Use DatabaseMigrations;
     Use DatabaseTransactions;
+    Use ValidationsFields;
 
     //Aqui cria-se os dados comuns que serão utilizados em todos os teste
     public function setUp()
@@ -34,6 +36,7 @@ class PedidoTest extends TestCase
         //Tudo precisa de um usuário
         factory(User::class)->create();
         $user = User::first();
+        \Auth::login($user);
 
         //cria endereço e vincula a cliente
 
@@ -141,7 +144,80 @@ class PedidoTest extends TestCase
         $this->assertEmpty(Pedido::first());
     }
 
-    //TODO fazer o front end e testar
-    //TODO teste de validação
+    /**
+     * @test
+     */
+    public function testaCrudNoFrontEnd()
+    {
+        //Esse metodo mostra melhor qual foi erro que aconteceu (deixar comentado caso não seja preciso)
+//        $this->disableExceptionHandling();
 
-}
+
+        //$cliente cria um pedido
+        $cliente = Cliente::first();
+
+        //Grava novo pedido
+        $this->response = $this->json('POST', "admin/pedidos", [
+            'NF' => 123456,
+        ]);
+
+        //verifica se a validação do campo deu certo
+        $this->assertValidationError('impressaoDeComprovante');
+        $this->assertValidationError('status');
+        $this->assertValidationError('tipoEntrega');
+        $this->assertValidationError('formaPagamento');
+
+
+        //Grava agora o registro corretamente
+        $response = $this->json('POST', "admin/pedidos",
+            [  "impressaoDeComprovante" => true,  "NF" => "21323" ,   "tipoEntrega" => 1 ,  "formaPagamento" => 1 ,  "status" => 1]
+            );
+
+        //Verifica se a resposa foi ok
+        $response->assertStatus(200);
+
+
+        //Busca pedido na tabela para comparação depois
+        $pedido = Pedido::firstOrFail();
+
+        //Busca registro gravado
+        $response = $this->json('GET', "admin/pedidos");
+
+        //Verifica status
+        $response->assertStatus(200);
+
+        //Ve se tem o registro na tela
+        $response->assertSee($pedido->cliente->nome);
+
+        //Atualiza o registro
+        $this->json('PUT', "admin/pedidos/{$pedido->id}",
+            [ "id" => 1,  "impressaoDeComprovante" => true,  "NF" => "123456789" ,   "tipoEntrega" => 2 ,  "formaPagamento" => 2 ,  "status" => 2]
+            );
+
+        //Busca novamente registro na tabela
+        $pedido = Pedido::firstOrFail();
+
+        //Verifica se a NF foi atualizada
+        $this->assertEquals("123456789", $pedido->NF);
+        $this->assertEquals(TipoEntrega::find(2), $pedido->tipoEntrega);
+        $this->assertEquals(FormaPagamento::find(2), $pedido->formaPagamento);
+
+        //Deleta registro
+        $response = $this->json('DELETE', "admin/pedidos/{$pedido->id}");
+
+        //Verifica se foi ok
+        $response->assertStatus(302);
+
+        //Verifica
+        $response->assertDontSee("123456789");
+
+        //Busca dado no banco de dadso
+        $pedido = Pedido::first();
+
+        //Verifica se foi buscado null
+        $this->assertNull($pedido);
+
+
+    }
+
+};;
