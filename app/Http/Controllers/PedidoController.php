@@ -143,6 +143,8 @@ class PedidoController extends Controller
         $tipoEntregas = $this->tipoEntregas;
         $formasPagamentos = $this->formasPagamentos;
 
+        $pedido = Pedido::with('produtos')->where('id', '=', $pedido->id)->get()->first();
+
         //retorna view da tela de edição com os dados nescessários
         return view('admin.pedidos.edit', compact('pedido', 'status', 'tipoEntregas', 'formasPagamentos'));
     }

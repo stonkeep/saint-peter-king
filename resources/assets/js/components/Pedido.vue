@@ -70,6 +70,26 @@
             </div>
 
 
+
+
+            <table id="tabel-pedidos">
+            <thead class="">
+            <tr>
+                <th>Descrição</th>
+                <th>Quantidade (peso)</th>
+                <th>Valor Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>teste</td>
+                <td>teste</td>
+                <td>teste</td>
+            </tr>
+
+            </tbody>
+            </table>
+
             <!--Submit-->
             <div class="form-group">
                 <button :disabled="form.busy" type="submit" class="btn btn-primary" name="enviar">Enviar</button>

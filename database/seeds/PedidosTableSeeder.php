@@ -34,8 +34,8 @@ class PedidosTableSeeder extends Seeder
 
             //Acrescenta os produtos aos pedidos
             $pedido->produtos()->attach([
-                1 => ['pesoSaida' => 10,'precoUnitario' => 10],
-                2 => ['pesoSaida' => 10,'precoUnitario' => 10]
+                1 => ['pesoSaida' => 10,'precoTotal' => 100.00],
+                2 => ['pesoSaida' => 10,'precoTotal' => 100.00]
             ]);
 
             $pedido->save();

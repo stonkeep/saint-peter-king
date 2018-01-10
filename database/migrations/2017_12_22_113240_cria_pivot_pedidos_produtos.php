@@ -22,7 +22,7 @@ class CriaPivotPedidosProdutos extends Migration
             $table->foreign('produto_id')->references('id')
                 ->on('produtos')->onDelete('cascade');
             $table->integer('pesoSaida');
-            $table->double("precoUnitario");
+            $table->double("precoTotal");
             $table->timestamps();
         });
     }
