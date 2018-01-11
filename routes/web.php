@@ -54,7 +54,30 @@ Route::prefix('admin')->group(function () {
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
 
+   //Posts
+    Route::get('posts', 'PostController@index')->name('indexPosts');
+    // show new post form
+    Route::get('new-post', 'PostController@create')->name('createPosts');
+    // save new post
+    Route::post('new-post', 'PostController@store')->name('storePosts');
+    // edit post form
+    Route::get('posts/edit/{slug}', 'PostController@edit')->name('editPosts');
+    // update post
+    Route::post('post/update/', 'PostController@update')->name('updatePosts');
+    // delete post
+    Route::get('posts/delete/{id}', 'PostController@destroy')->name('destroyPosts');
+    // display user's all posts
+    Route::get('my-all-posts', 'UserController@user_posts_all');
+    // display user's drafts
+    Route::get('my-drafts', 'UserController@user_posts_draft');
+
+//    Posts Categoria
+    Route::resource('post-categorias', 'PostCategoriaController');
+
 });
+
+//// display single post
+Route::get('/posts/{slug}', ['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');
 
 
 

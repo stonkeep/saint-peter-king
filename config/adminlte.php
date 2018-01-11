@@ -154,6 +154,20 @@ return [
 //            'label_color' => 'success',
 //            'can'  => 'gerenciar-usuarios',
         ],
+        'NEWS SETTINGS',
+        [
+            'text' => 'Posts',
+            'url'  => '/admin/posts',
+            'icon' => 'newspaper-o',
+            'permission' => 'Post',
+        ],
+        [
+            'text' => 'Post-Categorias',
+            'url'  => 'admin/post-categorias',
+            'icon' => 'tasks',
+            'permission' => 'Post',
+
+        ],
 //        'ACCOUNT SETTINGS',
 //        [
 //            'text' => 'Profile',
