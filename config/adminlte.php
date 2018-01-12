@@ -154,6 +154,19 @@ return [
 //            'label_color' => 'success',
 //            'can'  => 'gerenciar-usuarios',
         ],
+        'SETTINGS',
+        [
+            'text' => 'Files',
+            'url'  => '/admin/files',
+            'icon' => 'files-o',
+            'permission' => 'Files',
+        ],
+        [
+            'text' => 'Permissions',
+            'url'  => '/admin/permissions',
+            'icon' => 'key',
+            'permission' => 'Permission',
+        ],
         'NEWS SETTINGS',
         [
             'text' => 'Posts',

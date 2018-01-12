@@ -74,12 +74,13 @@ Route::prefix('admin')->group(function () {
 //    Posts Categoria
     Route::resource('post-categorias', 'PostCategoriaController');
 
+
+    // Settings
+    //Files
+    Route::view('/files', 'admin.settings.files');
+
 });
 
 //// display single post
 Route::get('/posts/{slug}', ['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');
-
-
-
-
 
