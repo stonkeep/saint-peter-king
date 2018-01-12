@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//TODO Cadastramento de usuário
+//TODO login
+//TODO lista fazer pedido
+//TODO lista produtos
+//TODO lista pedidos
+//TODO realiza pedido
+//TODO Busca pedido específico
+//TODO Cancelar pedido
+// TODO push status do pedido quando alterar? (notificação)
+
